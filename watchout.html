@@ -20,15 +20,19 @@
       }
     };
 
-
     var render = function(enemiesData){
-      enemies = gameBoard.selectAll('enemy').data(enemiesData, function(enemy){return enemy.id});
-    
-      enemies.enter().append('svg:circle').attr('class', 'enemy').attr('cx', function(enemy){return enemy.x}).attr('cy', function(enemy){ return enemy.y; }).attr('r', function(enemy){ return enemy.r; });
+    enemies.enter().append('svg:circle').attr('class', 'enemy').attr('cx', function(enemy){return enemy.x}).attr('cy', function(enemy){ return enemy.y; }).attr('r', function(enemy){ return enemy.r; });
     };
 
     createEnemies(36);
+    var enemies = gameBoard.selectAll('enemy').data(enemiesData, function(enemy){return enemy.id}).attr("transform", "translate(32," + (400) + ")");
     render(enemiesData);
+    console.log(enemies);
+
+    var animateEnemies = function(){
+      enemies.transition().duration(1000).attr("cx", function(d) { return Math.random()*800;}).attr('cy', function(d){return Math.random()*500;});
+    };
+    setInterval(function(){ animateEnemies();}, 1000);
     </script>
   </body>
 </html>
