@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+  <body> 
+    <script src="http://d3js.org/d3.v2.min.js?2.10.1"></script>
+    <script> 
+      var width = 960, height = 500;
+      var gameBoard = d3.select("body").append('svg')/*.attr("height",height).attr("width", width);*/
+      var enemiesData = [];
+      var createEnemies = function(n){
+      for (var i = 0; i < n; i++){ //creating enemies with random coordinates
+        var enemyObj = {
+          x: Math.floor(Math.random() * 800),
+          y: Math.floor(Math.random() * 500),
+          r: 10,
+          id:i
+        };
+        enemiesData.push(enemyObj); // add individual enemy object to enemiesArr
+      }
+    };
+
+
+    var render = function(enemiesData){
+      enemies = gameBoard.selectAll('enemy').data(enemiesData, function(enemy){return enemy.id});
+    
+      enemies.enter().append('svg:circle').attr('class', 'enemy').attr('cx', function(enemy){return enemy.x}).attr('cy', function(enemy){ return enemy.y; }).attr('r', function(enemy){ return enemy.r; });
+    };
+
+    createEnemies(36);
+    render(enemiesData);
+    </script>
+  </body>
+</html>
