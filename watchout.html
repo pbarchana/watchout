@@ -6,7 +6,7 @@
     <script src="http://d3js.org/d3.v2.min.js?2.10.1"></script>
     <script> 
       var width = 960, height = 500;
-      var gameBoard = d3.select("body").append('svg')/*.attr("height",height).attr("width", width);*/
+      var gameBoard = d3.select("body").append('svg');
       var enemiesData = [];
       var createEnemies = function(n){
       for (var i = 0; i < n; i++){ //creating enemies with random coordinates
@@ -43,12 +43,16 @@
     y: Math.random()*500,
     r: 10
     }];
-
+  var rect = gameBoard.append("rect").attr("width", 960).attr("height", 500).attr("opacity", 0).on("mousemove", mousemove);
   var player = gameBoard.selectAll('player').data(playerChar, function(player) {return player.id});
   var renderPlayer = function(playerChar){
     player.enter().append('svg:circle').attr('class', 'player').attr('cx', function(player){ return player.x}).attr('cy', function(player){return player.y}).attr('r', function(player){return player.r}).attr('fill', function(player){ return player.fill});
   };
   renderPlayer(playerChar);
+
+  var mousemove = function(){
+   coordinates = (d3.mouse(this));
+  }
 
 
 
