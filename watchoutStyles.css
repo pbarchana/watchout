@@ -1,0 +1,17 @@
+.gameboard {
+  top: 160px;
+  position: absolute;
+}
+
+#scores {
+  top: 40px;
+  right: 40px;
+  text-align: right;
+  background: #ddd;
+  position: absolute;
+  padding: 10px;
+  border-radius: 3px
+}
+
+
+
